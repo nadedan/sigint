@@ -35,13 +35,6 @@ func Defer(df func()) {
 	deferred <- df
 }
 
-// execute the deferred functions
-func execute() {
-	for _, f := range deferredFuncs {
-		f()
-	}
-}
-
 // listen for the signals and for new deferreds to be added
 func listen() {
 	for {
@@ -55,5 +48,12 @@ func listen() {
 
 			os.Exit(1)
 		}
+	}
+}
+
+// execute the deferred functions
+func execute() {
+	for _, f := range deferredFuncs {
+		f()
 	}
 }
